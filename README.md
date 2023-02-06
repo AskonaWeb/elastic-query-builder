@@ -6,7 +6,7 @@
 
 Composer:
 ```bash
-composer require spatie/elasticsearch-query-builder
+composer require askonaweb/elastic-query-builder
 ```
 
 ## Usage
