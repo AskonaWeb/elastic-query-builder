@@ -45,7 +45,25 @@ class BoolQueryTest extends TestCase
     public function testQueryTypes(): void
     {
         $expectedQueryTypes = ["must", "filter", "should", "must_not"];
-        $actualQueryTypes = UnitUtils::callMethod($this->boolQuery, "getAllowedQueryTypes");
+        $actualQueryTypes   = UnitUtils::callMethod($this->boolQuery, "getAllowedQueryTypes");
         $this->assertEquals($expectedQueryTypes, $actualQueryTypes);
+    }
+
+    public function testEmptyMinimumShouldMatch(): void
+    {
+        $key = "minimum_should_match";
+        $this->boolQuery->setMinimumShouldMatch("75%");
+        $this->assertArrayNotHasKey($key, $this->boolQuery->toArray()["bool"]);
+    }
+
+    public function testNotEmptyMinimumShouldMatch(): void
+    {
+        $key   = "minimum_should_match";
+        $value = "1";
+        $this->boolQuery->setMinimumShouldMatch($value);
+        $additionalQuery     = TermQuery::create("foo", "bar");
+        $additionalQueryType = "should";
+        $this->boolQuery->add($additionalQuery, $additionalQueryType);
+        $this->assertEquals($value, $this->boolQuery->toArray()["bool"][$key]);
     }
 }
