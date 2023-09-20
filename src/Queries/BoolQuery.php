@@ -6,11 +6,12 @@ use AskonaWeb\ElasticQueryBuilder\Exceptions\BoolQueryTypeDoesNotExist;
 
 class BoolQuery implements Query
 {
-    protected array $must                = [];
-    protected array $filter              = [];
-    protected array $should              = [];
-    protected array $must_not            = [];
-    protected array $allowedEmptyQueries = [];
+    protected array  $must                = [];
+    protected array  $filter              = [];
+    protected array  $should              = [];
+    protected array  $mustNot             = [];
+    protected array  $allowedEmptyQueries = [];
+    protected string $minimumShouldMatch;
 
     public static function create(): BoolQuery
     {
@@ -37,13 +38,19 @@ class BoolQuery implements Query
         return $this;
     }
 
+    public function setMinimumShouldMatch(string $minimumShouldMatch): BoolQuery
+    {
+        $this->minimumShouldMatch = $minimumShouldMatch;
+        return $this;
+    }
+
     public function toArray(): array
     {
         $bool = [
             "must"     => array_map(static fn(Query $query) => $query->toArray(), $this->must),
             "filter"   => array_map(static fn(Query $query) => $query->toArray(), $this->filter),
             "should"   => array_map(static fn(Query $query) => $query->toArray(), $this->should),
-            "must_not" => array_map(static fn(Query $query) => $query->toArray(), $this->must_not),
+            "must_not" => array_map(static fn(Query $query) => $query->toArray(), $this->mustNot),
         ];
 
         $payload = [
@@ -51,9 +58,13 @@ class BoolQuery implements Query
         ];
 
         foreach ($this->allowedEmptyQueries as $queryType) {
-            if (!$payload["bool"][$queryType]) {
+            if (empty($payload["bool"][$queryType])) {
                 $payload["bool"][$queryType] = [];
             }
+        }
+
+        if (!empty($this->minimumShouldMatch) && !empty($payload["bool"])) {
+            $payload["bool"]["minimum_should_match"] = $this->minimumShouldMatch;
         }
 
         return $payload;
