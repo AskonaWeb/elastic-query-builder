@@ -45,4 +45,10 @@ class NestedQueryTest extends TestCase
 
         $this->assertEquals($expectedPayload, $this->nestedQuery->toArray());
     }
+
+    public function testGetters(): void
+    {
+        $this->assertEquals($this->exampleQuery, $this->nestedQuery->getQuery());
+        $this->assertEquals($this->path, $this->nestedQuery->getPath());
+    }
 }

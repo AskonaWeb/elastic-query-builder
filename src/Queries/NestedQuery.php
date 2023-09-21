@@ -32,6 +32,16 @@ class NestedQuery implements Query
         return $this;
     }
 
+    public function getPath(): string
+    {
+        return $this->path;
+    }
+
+    public function getQuery(): Query
+    {
+        return $this->query;
+    }
+
     public function toArray(): array
     {
         $query = [
