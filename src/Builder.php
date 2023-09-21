@@ -57,6 +57,11 @@ class Builder
         return $this;
     }
 
+    public function getQuery(): ?BoolQuery
+    {
+        return $this->query;
+    }
+
     public function getRequestParams(): array
     {
         $payload = $this->getPayload();
