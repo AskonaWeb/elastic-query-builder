@@ -9,7 +9,7 @@ class BoolQuery implements Query
     protected array  $must                = [];
     protected array  $filter              = [];
     protected array  $should              = [];
-    protected array  $mustNot             = [];
+    protected array  $must_not            = [];
     protected array  $allowedEmptyQueries = [];
     protected string $minimumShouldMatch;
 
@@ -50,7 +50,7 @@ class BoolQuery implements Query
             "must"     => array_map(static fn(Query $query) => $query->toArray(), $this->must),
             "filter"   => array_map(static fn(Query $query) => $query->toArray(), $this->filter),
             "should"   => array_map(static fn(Query $query) => $query->toArray(), $this->should),
-            "must_not" => array_map(static fn(Query $query) => $query->toArray(), $this->mustNot),
+            "must_not" => array_map(static fn(Query $query) => $query->toArray(), $this->must_not),
         ];
 
         $payload = [

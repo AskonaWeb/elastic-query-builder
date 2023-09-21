@@ -49,6 +49,12 @@ class BoolQueryTest extends TestCase
         $this->assertEquals($expectedQueryTypes, $actualQueryTypes);
     }
 
+    public function testMustNot(): void
+    {
+        $this->boolQuery->add(TermQuery::create("foo", "bar"), "must_not");
+        $this->assertArrayHasKey("must_not", $this->boolQuery->toArray()["bool"]);
+    }
+
     public function testEmptyMinimumShouldMatch(): void
     {
         $key = "minimum_should_match";
