@@ -1,6 +1,6 @@
 # elastic-query-builder
 
-[![Latest Stable Version](http://poser.pugx.org/askonaweb/elastic-query-builder/v)](https://packagist.org/packages/askonaweb/elastic-query-builder) [![Total Downloads](http://poser.pugx.org/askonaweb/elastic-query-builder/downloads)](https://packagist.org/packages/askonaweb/elastic-query-builder) [![License](http://poser.pugx.org/askonaweb/elastic-query-builder/license)](https://packagist.org/packages/askonaweb/elastic-query-builder) [![PHP Version Require](http://poser.pugx.org/askonaweb/elastic-query-builder/require/php)](https://packagist.org/packages/askonaweb/elastic-query-builder)
+[![Latest Stable Version](https://img.shields.io/badge/stable-1.0.2-brightgreen)](https://packagist.org/packages/askonaweb/elastic-query-builder) [![Total Downloads](http://poser.pugx.org/askonaweb/elastic-query-builder/downloads)](https://packagist.org/packages/askonaweb/elastic-query-builder) [![License](http://poser.pugx.org/askonaweb/elastic-query-builder/license)](https://packagist.org/packages/askonaweb/elastic-query-builder) [![PHP Version Require](http://poser.pugx.org/askonaweb/elastic-query-builder/require/php)](https://packagist.org/packages/askonaweb/elastic-query-builder)
 
 ## Installation
 
