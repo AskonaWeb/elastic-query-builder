@@ -2,9 +2,11 @@
 
 namespace AskonaWeb\ElasticQueryBuilder\Sorts;
 
+use AskonaWeb\ElasticQueryBuilder\Queries\NestedSortQuery;
+
 class Sort
 {
-    public const ASC = "asc";
+    public const ASC  = "asc";
     public const DESC = "desc";
 
     protected string $field;
@@ -14,6 +16,8 @@ class Sort
     protected ?string $missing = null;
 
     protected ?string $unmappedType = null;
+
+    protected ?NestedSortQuery $nestedQuery = null;
 
     public static function create(string $field, string $order = self::DESC): Sort
     {
@@ -46,6 +50,12 @@ class Sort
         return $this;
     }
 
+    public function setNestedQuery(NestedSortQuery $query): Sort
+    {
+        $this->nestedQuery = $query;
+        return $this;
+    }
+
     public function toArray(): array
     {
         $payload = [
@@ -58,6 +68,10 @@ class Sort
 
         if ($this->unmappedType) {
             $payload["unmapped_type"] = $this->unmappedType;
+        }
+
+        if ($this->nestedQuery) {
+            $payload["nested"] = $this->nestedQuery->toArray();
         }
 
         return [
